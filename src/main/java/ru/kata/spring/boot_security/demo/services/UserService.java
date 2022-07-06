@@ -1,37 +1,19 @@
 package ru.kata.spring.boot_security.demo.services;
 
-import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.models.User;
-import ru.kata.spring.boot_security.demo.repositories.UserRepository;
 
 import java.util.List;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    private final UserRepository userRepository;
+    List<User> findAll();
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    User findByID(Long id);
 
+    void saveUser(User user);
 
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
+    void deleteByID(Long id);
 
-    public User findByID(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    public void saveUser(User user) {
-        userRepository.save(user);
-    }
-
-    public void deleteByID(Long id) {
-        userRepository.deleteById(id);
-    }
-
-    public User findByName(String name) { return userRepository.findByName(name);}
+    User findByName(String name);
 
 }
